@@ -10,8 +10,8 @@ classdef ftObjCLASS<handle
         xtm1_idmap, xt_idmap % variable indices whithin the global vector \xbar_T
         Nt  % total size of xtm1 and xt blocks
         ltObj %the object of the implemented loss function
-        nt
-        ntm1
+        nt % dim of x_t
+        ntm1 % dim of x_{t-1}
     end
     
     methods

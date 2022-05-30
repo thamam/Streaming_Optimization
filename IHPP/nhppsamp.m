@@ -1,13 +1,32 @@
 function [tK, alphaSyn, nhpp_t, params  ] = nhppsamp(lambdaMax, lambdaMin, spord, t0, tf  )
-% Simulate nonhomodenous Poisson process observations 
-% 
+% nhppsamp Simulate nonhomodenous Poisson process observations and
+% generating Bsplines parameters
+% Input:lambdaMax - 
+%       lambdaMin - 
+%       spord - 
+%       t0 - 
+%       tf - 
+% Output: tK - 
+%         alphaSyn - 
+%         nhpp_t - 
+%         params: 
+%                'Prate'-
+%                'minRate' - 
+%                'splineOrder' -
+%                'simTstart' -
+%                'simTfinish' -
+%                'iterThs' -
+%                'sectionLength' - 
+%                'nInd' - 
+%                'SupLen'
+%                'tsup.Start' -
+%                'tsup.End' - 
+%                'd'
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
 %
-%
-% global FIX_SEED
-% global DEBUG_MODE
 %% Set Global values
-FIX_SEED = false;
-DEBUG_MODE = false;
+global DEBUG_MODE ;
 
 %% Configure simulation Settings
 params = struct('Prate',lambdaMax,'minRate', lambdaMin,'splineOrder',spord,'simTstart',t0, 'simTfinish',tf,...
@@ -28,6 +47,7 @@ dateOfFile=date;
     if UseSavedNhppSimdData
         try
             load(params.fileNhppName);
+            fprintf('$ Simulation data file was loaded sucessfully \n');
         catch ME
             if( strcmp(ME.identifier,'MATLAB:load:couldNotReadFile') )
                 ME.message

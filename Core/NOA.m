@@ -1,4 +1,4 @@
-function [varargout] = TONA(nhp_params,streamOptions,tK, MAXBUFSIZE)
+function [varargout] = NOA(nhp_params,streamOptions,tK, MAXBUFSIZE)
 
 % [xstrm, XHIST, streambrkdwnData] = TONA(nhp_params,streamOptions, tK)
 %  xstrm -  as the optimal streaming solution including also the
@@ -28,6 +28,7 @@ nhp_params.fminconOptions = ...
     optimoptions(@fmincon,'MaxIterations',300,'MaxFunctionEvaluations',50000, ...
     'OptimalityTolerance',1e-10,'ConstraintTolerance',1e-10);
 
+fprintf(' $$ Setting streaming window size \n\n');
 [Tlim_div, xidmapTbl , xIndTbl, xlimTbl] = streamingbreakdown(nhp_params);
 streambrkdwnData  = struct('Tlim_div',Tlim_div, 'xidmapTbl',xidmapTbl,...
     'xIndTbl',xIndTbl, 'xlimTb',xlimTbl);
@@ -42,8 +43,8 @@ xbufObj   = MEMBUFFERCLASS(MAXBUFSIZE+1,bksz,'double',true); % buffer to manage 
 % MAXBUFSIZE
 
 JTinfObj  = cell(Tend,1);
-% do not change data written to frist row of arracy - saved for info on
-% array 
+% do not change data written to frist row of array - saved for info on
+% array
 
 JTinfObj{1,2} = bksz;
 x0=(1:1:bksz).'*0+1;

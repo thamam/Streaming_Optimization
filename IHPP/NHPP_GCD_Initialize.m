@@ -1,5 +1,5 @@
 function [params  ] = NHPP_GCD_Initialize(params)
-%UNTITLED Summary of this function goes here
+%NHPP_GCD_Initialize Summary of this function goes here
 %   Detailed explanation goes here    
 global FIX_SEED    
 %% General Settings

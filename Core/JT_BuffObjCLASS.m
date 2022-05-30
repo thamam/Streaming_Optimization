@@ -1,6 +1,8 @@
 classdef JT_BuffObjCLASS<handle
-    %UNTITLED4 Summary of this class goes here
-    %   Detailed explanation goes here
+    %JT_BuffObjCLASS Comulative objecive function object: 
+    %   This object aggregates all the ft funcational objects as they are
+    %   obtained. It's main methods are evaluating the cost function, its
+    %   gradient and its Hessian
     
     properties
         nmfnc %total expected number of batches for memory allocation
@@ -63,7 +65,7 @@ classdef JT_BuffObjCLASS<handle
             end
         end
         
-        function gradJ = GradJ(obj,x)
+        function gradJ = fgrad(obj,x)
             NT =  obj.NT; % Nt=\sum_{t=1}^T R^{n_T}
             gradJ= zeros(NT,1);
             lptr = obj.fObjArray.lptr;
@@ -81,7 +83,7 @@ classdef JT_BuffObjCLASS<handle
             end
         end
         
-        function HessJ = HessJ(obj,x)
+        function HessJ = fhessian(obj,x)
             NT =  obj.NT; % Nt=\sum_{t=1}^T R^{n_T}
             HessJ= zeros(NT, NT);
             lptr = obj.fObjArray.lptr;

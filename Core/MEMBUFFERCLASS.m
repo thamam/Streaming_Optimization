@@ -1,5 +1,7 @@
 classdef MEMBUFFERCLASS<handle
-    %UNTITLED3 Summary of this class goes here
+    %MEMBUFFERCLASS is a class to manage the memory buffer storing the
+    %solution variables and tracking which of the cost function should be
+    %active when using truncated settings, i.e. buffer is active.
     %   Detailed explanation goes here
     
     properties

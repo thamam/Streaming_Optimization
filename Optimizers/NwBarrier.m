@@ -1,5 +1,5 @@
 function [yout, it_hist] = NwBarrier(y0, f0, parms, options, tol,varargin)
-%UNTITLED5 Summary of this function goes here
+%NwBarrier Summary of this function goes here
 %   Detailed explanation goes here
 % varargin = {t0, mu, eps}
 
@@ -35,7 +35,7 @@ while ( frat>eps || lgbrCnt<1 ) %making sure we solve for x at least one time
     f = @(x) lgbrObj_Comp(x,f0, t);
     
     % 3. compute x* =argmin t*f + phi
-    [sol_y,it_hist, ierr,outstat ] = nsold(y0,f ,tol ,parms, options);
+    [sol_y,it_hist, ierr,outstat ] = nsold(y0, f ,tol ,parms, options);
     
     % 4. Update. x := x*(t).
     y0 = sol_y;

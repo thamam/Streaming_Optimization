@@ -1,5 +1,5 @@
 function [varargout] = NWSolver(Jobj,x, varargin)
-%
+% NWSolver.m 
 % [sol] =  NWSolver(Jobj,x,Ts,nonegxMod,t, mu, eps)
 % Return the Logbarrier constrained Newton solver
 
@@ -142,78 +142,78 @@ end
 
 end
 
-function [gradf, hesf] = objJ_fungrad(x, fobj, trunEn, xf_Tmb)
+% function [gradf, hesf] = objJ_fungrad(x, fobj, trunEn, xf_Tmb)
+% 
+% if trunEn %we modify the function call by fixing the value of xf_Tmb
+%     N = numel(x);
+%     bksz = fobj.bksz;
+%     x_act_ind = bksz+(1:N);
+%     
+%     xtld = [xf_Tmb; x];
+% 
+%     tmp_grad = fobj.GradJ(xtld);
+%     gradf = tmp_grad(x_act_ind);
+% 
+%      if nargout  > 1
+%         tmp_hesf = fobj.HessJ(xtld);
+%         hesf = tmp_hesf(x_act_ind,x_act_ind);
+%      end
+% else
+%     gradf = fobj.GradJ(x);
+%     % Gradient of the objective function:
+%     if nargout  > 1
+%         hesf = fobj.HessJ(x);
+%     end
+% end
+% 
+% end
 
-if trunEn %we modify the function call by fixing the value of xf_Tmb
-    N = numel(x);
-    bksz = fobj.bksz;
-    x_act_ind = bksz+(1:N);
-    
-    xtld = [xf_Tmb; x];
+% function [gradf, hesf] = objft_fungrad(x, fobj)
+% gradf = fobj.fgrad(x);
+% % gradf = gradf_(fobj.ntm1+1:end);
+% % Gradient of the objective function:
+% if nargout  > 1
+%     hesf = fobj.fhessian(x);
+%     %     hesf = hesf_(fobj.ntm1+1:end,fobj.ntm1+1:end);
+% end
+% 
+% end
 
-    tmp_grad = fobj.GradJ(xtld);
-    gradf = tmp_grad(x_act_ind);
+% function [gradf_xt,hes_xt] = objft_parder(x,fobj)
+% 
+% N = fobj.ntm1+fobj.nt;
+% 
+% U = eye(N);
+% Ut = U(fobj.ntm1+1:end,:);
+% 
+% gradf = fobj.fgrad(x);
+% gradf_xt = Ut*gradf;
+% 
+% if nargout  > 1
+%     hesf = fobj.fhessian(x);
+%     hes_xt = Ut*hesf*Ut.';
+% end
+% 
+% 
+% end
 
-     if nargout  > 1
-        tmp_hesf = fobj.HessJ(xtld);
-        hesf = tmp_hesf(x_act_ind,x_act_ind);
-     end
-else
-    gradf = fobj.GradJ(x);
-    % Gradient of the objective function:
-    if nargout  > 1
-        hesf = fobj.HessJ(x);
-    end
-end
+% function [Jobj]=updatearrayprop(Jobj, pval, Tmbp1, MAXBUFSIZE)
+% %update property value over a cellarray of class
+% % obj is handle to the class object cell array
+% % pname is the name of the property field to be upodated
+% % pval is the new value to be assigned
+% for i=Tmbp1:MAXBUFSIZE
+%     propmodcom = sprintf('Jobj.fObjArray.datalist{%i}.ltObj.lb_delta=pval ;',i);
+%     eval(propmodcom);
+% end
+% end
 
-end
-
-function [gradf, hesf] = objft_fungrad(x, fobj)
-gradf = fobj.fgrad(x);
-% gradf = gradf_(fobj.ntm1+1:end);
-% Gradient of the objective function:
-if nargout  > 1
-    hesf = fobj.fhessian(x);
-    %     hesf = hesf_(fobj.ntm1+1:end,fobj.ntm1+1:end);
-end
-
-end
-
-function [gradf_xt,hes_xt] = objft_parder(x,fobj)
-
-N = fobj.ntm1+fobj.nt;
-
-U = eye(N);
-Ut = U(fobj.ntm1+1:end,:);
-
-gradf = fobj.fgrad(x);
-gradf_xt = Ut*gradf;
-
-if nargout  > 1
-    hesf = fobj.fhessian(x);
-    hes_xt = Ut*hesf*Ut.';
-end
-
-
-end
-
-function [Jobj]=updatearrayprop(Jobj, pval, Tmbp1, MAXBUFSIZE)
-%update property value over a cellarray of class
-% obj is handle to the class object cell array
-% pname is the name of the property field to be upodated
-% pval is the new value to be assigned
-for i=Tmbp1:MAXBUFSIZE
-    propmodcom = sprintf('Jobj.fObjArray.datalist{%i}.ltObj.lb_delta=pval ;',i);
-    eval(propmodcom);
-end
-end
-
-function [f,gradf] = objft_fun(x, fobj)
-f = fobj.feval(x);
-% gradf = gradf_(fobj.ntm1+1:end);
-% Gradient of the objective function:
-if nargout  > 1
-    gradf = fobj.fgrad(x);    %     hesf = hesf_(fobj.ntm1+1:end,fobj.ntm1+1:end);
-end
-
-end
+% function [f,gradf] = objft_fun(x, fobj)
+% f = fobj.feval(x);
+% % gradf = gradf_(fobj.ntm1+1:end);
+% % Gradient of the objective function:
+% if nargout  > 1
+%     gradf = fobj.fgrad(x);    %     hesf = hesf_(fobj.ntm1+1:end,fobj.ntm1+1:end);
+% end
+% 
+% end

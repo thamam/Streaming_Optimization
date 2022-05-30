@@ -1,5 +1,5 @@
 function [Tlim_div, xidmap , xindTbl, xindlimTbl] = streamingbreakdown(params)
-%UNTITLED Summary of this function goes here
+%streamingbreakdown Summary of this function goes here
 %   Detailed explanation goes here
 blocksize = params.blocksize;
 Tlim = [params.simTstart, params.simTfinish];
